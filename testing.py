@@ -1,7 +1,7 @@
 from datetime import datetime
 from flask import Flask, render_template, url_for, flash, redirect
 from flask_sqlalchemy import SQLAlchemy
-from forms import RegistrationForm,LoginForm
+from forms import AddItem
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'mayacomp2011cw1'
@@ -30,31 +30,6 @@ class Post(db.Model):
         return f"Post('{self.title}', '{self.date_posted}')"
 
 
-
-
-
-
-
-
-
-
-
-
-
-posts = [
-    {
-    'author':'Maya',
-    'title':'My first blog',
-    'content':'content inside my blog',
-    'date_posted':'24th june 2019'
-    },
-    {
-    'author':'Tals',
-    'title':'My second  blog',
-    'content':'content inside my blog',
-    'date_posted':'14th october 2019'
-    }
-]
 @app.route("/")
 @app.route("/home")
 def home():
