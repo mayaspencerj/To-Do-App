@@ -4,11 +4,14 @@ from datetime import datetime
 from forms import CreateForm
 
 
+
+
 app = Flask(__name__)
 
 app.config['SECRET_KEY'] = 'amayamaya'
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///site.db'
 db = SQLAlchemy(app)
+
 
 class Items(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -46,7 +49,6 @@ def create():
         return redirect(url_for('view_all'))
     return render_template('create.html', title='New Post',
                            form=form, legend='New Post')
-
 
 if __name__ == '__main__':
     app.run(debug=True)
