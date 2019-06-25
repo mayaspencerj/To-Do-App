@@ -1,5 +1,7 @@
-from flask import Flask, render_template, url_for
+from flask import Flask, render_template, url_for, flash, redirect
+from forms import CreateForm
 app = Flask(__name__)
+app.config['SECRET_KEY'] = 'amayamaya'
 
 posts = [
     {
@@ -27,9 +29,17 @@ def view_all():
 def view_completed():
     return render_template('view_completed.html', title='About')
 
-@app.route("/create")
+
+
+@app.route("/create", methods=['GET', 'POST'])
 def create():
-    return render_template('create.html', title='Create')
+    form = CreateForm()
+    if form.validate_on_submit():
+        return redirect(url_for('home'))
+    else:
+        flash('Post Unsuccessful. Please check minimum requirements', 'danger')
+    return render_template('create.html', title='Create', form=form)
+
 
 
 
