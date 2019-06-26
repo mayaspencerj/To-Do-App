@@ -18,11 +18,12 @@ class Items(db.Model):
     title = db.Column(db.String(20), unique=False, nullable=False)
     content = db.Column(db.String(120), unique=True, nullable=False)
     date_posted = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
-    complete = db.Column(db.Boolean, unique=False, default=False)
+    complete = db.Column(db.Boolean, unique=False)
 
-    def __init__(self,title,content):
+    def __init__(self,title,content,complete):
         self.title = title
         self.content = content
+        self.complete = complete
 
 @app.route("/")
 @app.route("/view_all")
@@ -42,7 +43,7 @@ def view_completed():
 def create():
     form = CreateForm()
     if form.validate_on_submit():
-        post = Items(title=form.title.data, content=form.content.data)
+        post = Items(title=form.title.data, content=form.content.data, complete=False)
         db.session.add(post)
         db.session.commit()
         flash('Your post has been created!', 'success')
