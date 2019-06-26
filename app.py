@@ -28,20 +28,18 @@ class Items(db.Model):
 @app.route("/")
 @app.route("/view_all")
 def view_all():
-    posts = Items.query.all()
+    posts = Items.query.filter_by(complete=0)
+#    posts = Items.query.all()
     return render_template('view_all.html', posts=posts)
 
 @app.route("/view_completed/<id>")
 def view_completed(id):
-
     if int(id)>0:
         post = Items.query.filter_by(id=int(id)).first() #gets specific id of button that was pressed
         post.complete = True #marks it as complete
         db.session.commit()
-
     else:
         pass
-
     posts = Items.query.filter_by(complete=True)
     #update record to be complete =1
     return render_template('view_completed.html', posts=posts)
@@ -57,6 +55,11 @@ def create():
         return redirect(url_for('view_all'))
     return render_template('create.html', title='New Post',
                            form=form, legend='New Post')
+
+@app.route("/view_incomplete")
+def view_incomplete():
+    posts = Items.query.filter_by(complete=0)
+    return render_template('view_all.html', posts=posts)
 
 if __name__ == '__main__':
     app.run(debug=True)
