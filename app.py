@@ -25,7 +25,9 @@ class Items(db.Model):
 @app.route("/")
 @app.route("/view_all")
 def view_all():
-    posts = Items.query.all()
+#    posts = Items.query.all()
+    posts = Items.query.order_by(Items.date_posted.desc()).all()
+
     return render_template('view_all.html', posts=posts)
 
 @app.route("/view_completed/<id>")
