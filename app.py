@@ -28,8 +28,8 @@ class Items(db.Model):
 @app.route("/")
 @app.route("/view_all")
 def view_all():
-    posts = Items.query.filter_by(complete=0)
-#    posts = Items.query.all()
+
+    posts = Items.query.all()
     return render_template('view_all.html', posts=posts)
 
 @app.route("/view_completed/<id>")
@@ -40,6 +40,7 @@ def view_completed(id):
         db.session.commit()
     else:
         pass
+
     posts = Items.query.filter_by(complete=True)
     #update record to be complete =1
     return render_template('view_completed.html', posts=posts)
