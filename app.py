@@ -3,9 +3,6 @@ from flask_sqlalchemy import SQLAlchemy
 from datetime import datetime
 from forms import CreateForm
 
-
-
-
 app = Flask(__name__)
 
 app.config['SECRET_KEY'] = 'amayamaya'
@@ -28,7 +25,6 @@ class Items(db.Model):
 @app.route("/")
 @app.route("/view_all")
 def view_all():
-
     posts = Items.query.all()
     return render_template('view_all.html', posts=posts)
 
