@@ -5,11 +5,6 @@ body {
   margin-top: 5rem;
 }
 
-
-.site-header .navbar-nav .nav-link:hover {
-  color: #ffffff;
-}
-
 .content-section {
   background: #ffffff;
   padding: 10px 20px;
@@ -19,7 +14,7 @@ body {
 }
 
 
-.navbar{
+.navbar {
     background-color: #61B2E3;
     border-color: #61B2E3;
 }
