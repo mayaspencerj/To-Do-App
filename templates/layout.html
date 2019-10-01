@@ -14,7 +14,6 @@
     <header class="site-header">
     <!--  <nav class="navbar navbar-expand-md navbar-dark bg-steel fixed-top"> -->
       <nav class="navbar navbar-dark bg-primary fixed-top">
-
         <div class="container">
           <a class="navbar-brand mr-4" href="/">Maya's To Do App </a>
           <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggle" aria-controls="navbarToggle" aria-expanded="false" aria-label="Toggle navigation">
@@ -25,9 +24,6 @@
     </header>
     <main role="main" class="container">
       <div class="row">
-        <div class="col-md-8">
-          {% block content %}{% endblock %}
-        </div>
         <div class="col-md-4">
           <div class="content-section">
             <h3>Your Options</h3>
@@ -41,6 +37,10 @@
             </p>
           </div>
         </div>
+        <div class="col-md-8">
+          {% block content %}{% endblock %}
+        </div>
+
       </div>
     </main>
     <!-- Optional JavaScript -->
