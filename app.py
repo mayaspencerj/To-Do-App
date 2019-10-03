@@ -7,7 +7,7 @@ from forms import CreateForm
 
 app = Flask(__name__)
 
-app.config['SECRET_KEY'] = 'amayamaya'
+app.config['SECRET_KEY'] = 'mayamaya'
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///site.db'
 db = SQLAlchemy(app)
 
@@ -28,7 +28,6 @@ class Items(db.Model):
 @app.route("/view_all")
 def view_all():
     posts = Items.query.order_by(Items.date_posted.desc()).all()
-
     return render_template('view_all.html', posts=posts)
 
 @app.route("/view_completed/<id>")
@@ -55,6 +54,7 @@ def create():
         return redirect(url_for('view_all'))
     return render_template('create.html', title='New Post',
                            form=form, legend='New Post')
+
 
 @app.route("/view_incomplete")
 def view_incomplete():
