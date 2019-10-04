@@ -3,8 +3,6 @@ from flask_sqlalchemy import SQLAlchemy
 from datetime import datetime
 from forms import CreateForm
 
-#cw1
-
 app = Flask(__name__)
 
 app.config['SECRET_KEY'] = 'mayamaya'
@@ -50,7 +48,7 @@ def create():
         post = Items(title=form.title.data, content=form.content.data, complete=False)
         db.session.add(post)
         db.session.commit()
-        flash('Your post has been created!', 'success')
+        flash('Your post has now been created!', 'success')
         return redirect(url_for('view_all'))
     return render_template('create.html', title='New Post',
                            form=form, legend='New Post')
