@@ -1,8 +1,8 @@
-
 body {
   background: #61B2E3;
   color: #333333;
   margin-top: 5rem;
+  background-color: coral;
 }
 
 .content-section {
@@ -11,9 +11,4 @@ body {
   border: 1px solid #dddddd;
   border-radius: 3px;
   margin-bottom: 20px;
-}
-
-.navbar {
-    background-color: #E1AEF1;
-    border-color: #e1aef1;
 }

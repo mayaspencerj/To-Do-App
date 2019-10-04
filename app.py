@@ -5,7 +5,7 @@ from forms import CreateForm
 
 app = Flask(__name__)
 
-app.config['SECRET_KEY'] = 'mayamaya'
+app.config['SECRET_KEY'] = 'maydamaya'
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///site.db'
 db = SQLAlchemy(app)
 
@@ -23,6 +23,18 @@ class Items(db.Model):
         self.complete = complete
 
 @app.route("/")
+@app.route("/create", methods=['GET', 'POST'])
+def create():
+    form = CreateForm()
+    if form.validate_on_submit():
+        post = Items(title=form.title.data, content=form.content.data, complete=False)
+        db.session.add(post)
+        db.session.commit()
+        flash('Your post has now been created!', 'success')
+        return redirect(url_for('view_all'))
+    return render_template('create.html', title='New Post',
+                           form=form, legend='New Post')
+
 @app.route("/view_all")
 def view_all():
     posts = Items.query.order_by(Items.date_posted.desc()).all()
@@ -40,18 +52,6 @@ def view_completed(id):
     posts = Items.query.filter_by(complete=True)
     #update record to be complete =1
     return render_template('view_completed.html', posts=posts)
-
-@app.route("/create", methods=['GET', 'POST'])
-def create():
-    form = CreateForm()
-    if form.validate_on_submit():
-        post = Items(title=form.title.data, content=form.content.data, complete=False)
-        db.session.add(post)
-        db.session.commit()
-        flash('Your post has now been created!', 'success')
-        return redirect(url_for('view_all'))
-    return render_template('create.html', title='New Post',
-                           form=form, legend='New Post')
 
 
 @app.route("/view_incomplete")
