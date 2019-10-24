@@ -9,9 +9,11 @@ import os.path
 app = Flask(__name__)
 
 #CHECK IF THE DATABASE HAS CREATED
-app.config['SECRET_KEY'] = 'mayamaya'
+app.config['SECRET_KEY'] = '234iujvec984c839mji'
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///site.db'
 db = SQLAlchemy(app)
+db.create_all()
+
 
 
 #DECLARING A MODEL, MY ITEMS TABLE TO HOLD TO DO ITEMS
