@@ -1,33 +1,10 @@
-#IMPORT THE REQUIRED FRAMEWORKS / LIBRARIES
+from app import app
 from flask import Flask, render_template, url_for, flash, redirect
 from flask_sqlalchemy import SQLAlchemy
 from datetime import datetime
-from forms import CreateForm
+from .forms import CreateForm
+from .models import db, Items
 import os.path
-
-#FLASK CONSTRUCTOR
-app = Flask(__name__)
-
-#CHECK IF THE DATABASE HAS CREATED
-app.config['SECRET_KEY'] = '234iujvec984c839mji'
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///site.db'
-db = SQLAlchemy(app)
-db.create_all()
-
-
-
-#DECLARING A MODEL, MY ITEMS TABLE TO HOLD TO DO ITEMS
-class Items(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    title = db.Column(db.String(20), unique=False, nullable=False)
-    content = db.Column(db.String(120), unique=True, nullable=False)
-    date_posted = db.Column(db.DateTime, nullable=False, default=datetime.now())
-    complete = db.Column(db.Boolean, unique=False)
-
-    def __init__(self,title,content,complete):
-        self.title = title
-        self.content = content
-        self.complete = complete
 
 
 #DECORATER TO BIND FUNCTION TO URL
@@ -74,6 +51,3 @@ def view_incomplete():
     posts = Items.query.filter_by(complete=0)
     #DISPLAY TO USER
     return render_template('view_all.html', posts=posts)
-
-if __name__ == '__main__':
-    app.run(debug=True)

@@ -1,5 +1,6 @@
+
 from app import db
-from flask_sqlalchemy import SQLAlchemy
+from datetime import datetime
 
 #DECLARING A MODEL, MY ITEMS TABLE TO HOLD TO DO ITEMS
 class Items(db.Model):
@@ -13,3 +14,4 @@ class Items(db.Model):
         self.title = title
         self.content = content
         self.complete = complete
+
