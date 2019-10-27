@@ -4,6 +4,8 @@ from app import db
 from config_app import SQLALCHEMY_DATABASE_URI
 from config_app import SQLALCHEMY_MIGRATE_REPO
 
+
+#sets up migration system so when model structure change the DB, migration system will map and reflect this
 v = api.db_version(SQLALCHEMY_DATABASE_URI, SQLALCHEMY_MIGRATE_REPO)
 migration = SQLALCHEMY_MIGRATE_REPO + ('/versions/%03d_migration.py' % (v+1))
 tmp_module = imp.new_module('old_model')
