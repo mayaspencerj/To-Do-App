@@ -1,9 +1,9 @@
-
 from app import db
 from datetime import datetime
 
-#DECLARING A MODEL, MY ITEMS TABLE TO HOLD TO DO ITEMS
+#DECLARING MODEL, MY ITEMS TABLE TO HOLD TO DO ITEMS
 class Items(db.Model):
+    #five columns including the primary key
     id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String(20), unique=False, nullable=False)
     content = db.Column(db.String(120), unique=True, nullable=False)
