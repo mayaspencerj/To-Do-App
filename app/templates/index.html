@@ -1,43 +1,46 @@
 <!DOCTYPE html>
-<html>
-<head>
-    <!-- Required meta tags -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='main.css') }}">
-    <title> Your ToDo list! </title>
-</head>
-<body>
-    <header class="site-header">
-    <nav class="navbar navbar-dark bg-primary fixed-top bg-danger">
-      <span class="navbar-brand mb-0 h1"> Maya's To Do App </span>
-    </nav>
-    </header>
-    <main role="main" class="container">
-      <div class="row">
-        <div class="col-md-4">
-          <div class="content-section">
-            <h3>Your Options</h3>
-            <p class='text-muted'>Welcome to your to do list!
-              <ul class="list-group">
-                <a class="nav-item nav-link" href="/create">Create a new Task</a>
-                <a class="nav-item nav-link" href="/view_all">View All Tasks</a>
-                <a class="nav-item nav-link" href="{{ url_for('view_completed',id=0) }}">View Completed Tasks</a>
-                <a class="nav-item nav-link" href="{{ url_for('view_incomplete') }}">View Incompleted Tasks</a>
-              </ul>
-            </p>
-          </div>
-        </div>
-        <div class="col-md-8">
-          {% block content %}{% endblock %}
-        </div>
 
-      </div>
-    </main>
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-</body>
+<html lang="en">
+  <head>
+      <!-- meta tags declaring character encoding and scaling -->
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+      <!-- link Bootstrap CSS and list to main.css file -->
+      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+      <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='main.css') }}">
+      <title> Your To Do list! </title>
+  </head>
+  <body>
+      <!--Navbar style strip at top with title-->
+      <header class="site-header">
+      <nav class="navbar navbar-dark bg-primary fixed-top bg-danger">
+        <span class="navbar-brand mb-0 h1"> Maya's To Do App </span>
+      </nav>
+      </header>
+      <main class="container">
+        <div class="row">
+          <div class="col-md-4">
+            <div class="content-section">
+              <h3>Your Options</h3>
+              <p class='text-muted'>Welcome to your to do list! </p>
+                <ul class="list-group">
+                  <!-- items listed in the left hand menu-->
+                  <li><a class="nav-item nav-link" href="/create">Create a new Task</a> </li>
+                  <li><a class="nav-item nav-link" href="/view_all">View All Tasks</a></li>
+                  <li><a class="nav-item nav-link" href="{{url_for('view_completed',id=0) }}">View Completed Tasks</a></li>
+                  <li><a class="nav-item nav-link" href="{{ url_for('view_incomplete') }}">View Incompleted Tasks</a></li>
+                </ul>
+
+            </div>
+          </div>
+          <div class="col-md-8">
+            {% block content %}{% endblock %}
+          </div>
+
+        </div>
+      </main>
+      <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+      <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+  </body>
 </html>

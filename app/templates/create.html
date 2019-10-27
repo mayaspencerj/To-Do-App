@@ -1,6 +1,6 @@
 <!-- Extends general layout from index html, only content is different  -->
-<!-- this page has the form created in forms.py and uses requests to transmit the entered data-->
-
+<!-- this page has the form created in forms.py and users requests to transmit the entered data-->
+<html lang="en">
 {% extends "index.html" %}
 {% block content %}
     <div class="content-section">
@@ -8,6 +8,7 @@
             {{ form.hidden_tag() }}
             <fieldset class="form-group">
                 <legend class="border-bottom mb-4">Create an item for your to do list! </legend>
+                <!-- TITLE FIELD -->
                 <div class="form-group">
                     {{ form.title.label(class="form-control-label") }}
                     {% if form.title.errors %}
@@ -21,6 +22,7 @@
                         {{ form.title(class="form-control form-control-lg") }}
                     {% endif %}
                 </div>
+                <!-- CONTENT FIELD -->
                 <div class="form-group">
                     {{ form.content.label(class="form-control-label") }}
                     {% if form.content.errors %}
@@ -34,8 +36,8 @@
                         {{ form.content(class="form-control form-control-lg") }}
                     {% endif %}
                 </div>
-
             </fieldset>
+            <!-- SUBMIT BUTTON ON FORM-->
             <div class="form-group">
                 {{ form.submit(class="btn btn-outline-info") }}
             </div>
