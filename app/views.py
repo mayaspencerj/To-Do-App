@@ -1,21 +1,23 @@
 from app import app
 from flask import Flask, render_template, url_for, flash, redirect
 from flask_sqlalchemy import SQLAlchemy
-from datetime import datetime
+import datetime
 from .forms import CreateForm
 from .models import db, Items
 import os.path
 
 
-#DECORATER TO BIND FUNCTION TO URL
+#ROUTE TO BIND FUNCTION TO URL
+#FIRST ROUTE TO LOAD WHEN APPLICATION LOADED
 @app.route("/")
 @app.route("/create", methods=['GET', 'POST'])
 def create():
-    form = CreateForm() #CREATE TO DO ITMES FORM
+    form = CreateForm() #CREATE TO DO ITEMS FORM
     #IF SUBMITTED CORRECTLY THEN COMMIT RECORD TO TABLE
-    #ERROR MESSAGE WILL TELL USER TO FILL BLANK TEXTBOXES OTHERWISE
+    #ERROR MESSAGE WILL TELL USER TO FILL BLANK TEXTBOXES/REDUCE LENGTH OF CONTENT OTHERWISE
     if form.validate_on_submit():
-        post = Items(title=form.title.data, content=form.content.data, complete=False)
+        time = datetime.datetime.now()
+        post = Items(title=form.title.data, content=form.content.data, date_posted=time, complete=False, )
         db.session.add(post)
         db.session.commit()
         flash('Your post has now been created!', 'success')
@@ -25,13 +27,13 @@ def create():
                            form=form, legend='New Post')
 
 
-#DECORATOR TO VIEW ALL THE RECORDS / TO DO ITEMS
+#ROUTE TO VIEW ALL THE RECORDS / TO DO ITEMS
 @app.route("/view_all")
 def view_all():
     posts = Items.query.order_by(Items.date_posted.desc()).all()
     return render_template('view_all.html', posts=posts)
 
-#DECORATER TO VIEW ALL COMPLETED TASKS
+#ROUTE TO VIEW ALL COMPLETED TASKS
 @app.route("/view_completed/<id>")
 def view_completed(id):
     #IF COMPLETE, ID WILL BE 1 (OTHERWISE SET TO 0)
@@ -45,7 +47,7 @@ def view_completed(id):
     #update record to be complete = 1
     return render_template('view_completed.html', posts=posts)
 
-#DECORATER TO VIEW ALL INCOMPLETE TASKS
+#ROUTE TO VIEW ALL INCOMPLETE TASKS
 @app.route("/view_incomplete")
 def view_incomplete():
     posts = Items.query.filter_by(complete=0)
